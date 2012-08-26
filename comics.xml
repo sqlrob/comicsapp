@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- Created by RMyers on July 14, 2001, 10:48 AM -->
+<?xml-stylesheet href="comics.xsl" type="text/xsl"?>
+
+<ComicsPage>
+<!--                 <Comic href="X" source="Other">XXXX</Comic> -->
+	<Comics>
+		<Category name="Comics">
+			<OtherComic href="http://www.chron.com/apps/comics/showComics.mpl" source="Houston Chronicle">(chron.com for Sundays)</OtherComic>
+			<Comic href="http://www.schlockmercenary.com/" source="Other">Schlock Mercenary</Comic>
+			<Comic href="http://www.sheldoncomics.com/" source="Other">Sheldon</Comic>
+			<Comic href="http://www.questionablecontent.net/" source="Other">Questionable Content</Comic>
+			<Comic href="http://xkcd.com/" source="Other">XKCD</Comic>
+			<Comic href="http://www.punchanpie.net/" source="Keenspot">Punch an' Pie</Comic>
+			<Comic href="http://www.leasticoulddo.com/" source="Other">Least I Could Do</Comic>
+			<Comic href="http://www.girlswithslingshots.com/" source="Other">Girls With Slingshots</Comic>
+			<Comic href="http://www.sinfest.net/index.php" source="Other">Sinfest</Comic>
+			<Comic href="http://candicomics.com/" source="Other">Candi</Comic>
+			<Comic href="http://www.gocomics.com/luann/" source="GoComics">Luann</Comic>
+			<Comic href="http://www.gocomics.com/frazz/" source="GoComics">Frazz</Comic>
+			<Comic href="http://www.gocomics.com/chickweed/" source="GoComics">9 Chickweed Lane </Comic>
+			<Comic href="http://retailcomic.com/" source="Other">Retail</Comic>
+			<Comic href="http://www.gocomics.com/stonesoup" source="GoComics">Stone Soup</Comic>
+			<Comic href="http://www.washingtonpost.com/wp-srv/artsandliving/comics/king.html?name=Baby_Blues" source="Washington Post">Baby Blues</Comic>
+			<Comic href="http://www.gocomics.com/pearls/" source="GoComics">Pearls Before Swine</Comic>
+			<Comic href="http://www.gocomics.com/getfuzzy/" source="GoComics">Get Fuzzy</Comic>
+			<Comic href="http://www.dilbert.com/fast" source="Other">Dilbert</Comic>
+			<Comic href="http://www.gocomics.com/nonsequitur" source="GoComics">Non Sequitur</Comic>
+			<Comic href="http://www.washingtonpost.com/wp-srv/artsandliving/comics/king.html?name=Bizarro" source="Washington Post">Bizarro</Comic>
+			<Comic href="http://theargylesweater.com/" source="Other">The Argyle Sweater</Comic>
+			<Comic href="http://www.gocomics.com/calvinandhobbes" source="Other">Calvin &amp; Hobbes</Comic>
+			<Comic href="http://www.gocomics.com/bloomcounty" source="Other">Bloom County</Comic>
+			<Comic href="http://www.gocomics.com/doonesbury" source="GoComics">Doonesbury</Comic>
+			<Comic href="http://www.chron.com/entertainment/comics-games/comic/Funky-Winkerbean/" source="Houston Chronicle">Funky Winkerbean</Comic>
+			<Comic href="http://www.washingtonpost.com/wp-srv/artsandliving/comics/king.html?name=Sally_Forth" source="Washington Post">Sally Forth</Comic>
+			<Comic href="http://www.chron.com/entertainment/comics-games/comic/Crankshaft/" source="Houston Chronicle">Crankshaft</Comic>
+			<Comic href="http://www.chron.com/entertainment/comics-games/comic/Buckles/" source="Houston Chronicle">Buckles</Comic>
+			<Comic href="http://www.washingtonpost.com/wp-srv/artsandliving/comics/king.html?name=6Chix" source="Washington Post">SixChix</Comic>
+			<Comic href="http://www.chron.com/entertainment/comics-games/comic/Safe-Havens/" source="Houston Chronicle">Safe Havens</Comic>
+			<Comic href="http://thedevilspanties.com/" source="Other">The Devil's Panties</Comic>
+			<Comic href="http://www.commissionedcomic.com/" source="Other">Commissioned</Comic>
+			<Comic href="http://www.cad-comic.com/cad/" source="Other">Ctrl-Alt-Del</Comic>
+			<Comic href="http://penny-arcade.com/comic" source="Other">Penny Arcade</Comic>
+			<Comic href="http://pvponline.com/comic" source="Other">PvP</Comic>
+			<Comic href="http://www.unshelved.com/" source="Other">Unshelved</Comic>
+			<Comic href="http://www.gocomics.com/brewsterrockit/" source="GoComics">Brewster Rockit</Comic>
+			<Comic href="http://www.gocomics.com/overthehedge/" source="GoComics">Over the Hedge</Comic>
+			<Comic href="http://www.gocomics.com/poochcafe/" source="GoComics">Pooch Cafe</Comic>
+			<Comic href="http://www.gocomics.com/duplex/" source="GoComics">Duplex</Comic>
+			<Comic href="http://www.shoecomics.com/comics.php" source="Other">Shoe</Comic>
+			<Comic href="http://www.grimmy.com/comics.php" source="Other">Mother Goose &amp; Grimm</Comic>
+			<Comic href="http://www.gocomics.com/theothercoast/" source="GoComics">The Other Coast</Comic>
+			<Comic href="http://www.chron.com/entertainment/comics-games/comic/Rhymes-with-Orange/" source="Houston Chronicle">Rhymes with Orange</Comic>
+			<Comic href="http://www.washingtonpost.com/wp-srv/artsandliving/comics/king.html?name=Hagar_The_Horrible" source="Washington Post">Hagar The Horrible</Comic>
+			<Comic href="http://www.chron.com/entertainment/comics-games/comic/Sherman-s-Lagoon/" source="Houston Chronicle">Sherman's Lagoon</Comic>
+			<Comic href="http://www.gocomics.com/bc/" source="GoComics">B.C.</Comic>
+			<Comic href="http://www.gocomics.com/wizardofid/" source="GoComics">Wizard of Id</Comic>
+			<Comic href="http://www.gocomics.com/reallifeadventures" source="GoComics">Real Life Adventures</Comic>
+			<Comic href="http://www.gocomics.com/realitycheck/" source="GoComics">Reality Check</Comic>
+			<Comic href="http://www.gocomics.com/rubes/" source="GoComics">Rubes</Comic>
+			<Comic href="http://www.gocomics.com/closetohome" source="GoComics">Close to Home</Comic>
+			<Comic href="http://www.gocomics.com/committed/" source="GoComics">Committed</Comic>
+			<Comic href="http://www.gocomics.com/speedbump/" source="GoComics">Speed Bump</Comic>
+			<Comic href="http://www.explosm.net/comics/new/" source="Other">Cyanide &amp; Happiness</Comic>
+			<Comic href="http://www.myextralife.com/" source="Other">Extra Life</Comic>
+			<Comic href="http://www.gucomics.com/comic/" source="Other">GU Comics</Comic>
+			<Comic href="http://joshreads.com/" source="Other">Comics Curmudgeon</Comic>
+		</Category>
+
+		<Category name="Semi-Weekly">
+			<Comic href="http://www.foxtrot.com/" source="Other">Foxtrot</Comic>
+			<Comic href="http://somethingpositive.net/index.html" source="Other">Something Positive</Comic>
+			<Comic href="http://www.twolumps.net/" source="Other">Two Lumps</Comic>
+			<Comic href="http://basicinstructions.net/" source="Other">Basic Instructions</Comic>
+			<Comic href="http://www.reallifecomics.com/" source="Other">Real Life</Comic>
+			<Comic href="http://www.sexdrugsandjunecleaver.com/" source="Other">Sex, Drugs, &amp; June Cleaver</Comic>
+			<Comic href="http://hijinksensue.com/" source="Other">Hijinks Ensue</Comic>
+			<Comic href="http://www.shesalmostnormal.com/" source="Other">Almost Normal</Comic>
+			<Comic href="http://www.asofterworld.com/index.php" source="Other">A Softer World</Comic>
+			<Comic href="http://www.amazingsuperpowers.com/" source="Other">Amazing Super Powers</Comic>
+			<Comic href="http://www.joyoftech.com/joyoftech/index.html" source="Other">Joy of Tech</Comic>
+			<Comic href="http://www.cad-comic.com/sillies/" source="Other">CAD Sillies</Comic>
+			<Comic href="http://www.livingwithinsanity.com/index/" source="Other">Living With Insanity</Comic>
+			<Comic href="http://eddirt.frozenreality.co.uk/index.php" source="Other">Edible Dirt</Comic>
+		</Category>
+
+		<Category name="Whenever">
+			<Comic href="http://dollar.jinwicked.com/" source="Other">A Dollar Late</Comic>
+			<Comic href="http://www.viruscomix.com/subnormality.html" source="Other">Subnormality</Comic>
+			<Comic href="http://www.awkwardzombie.com/" source="Other">Awkward Zombie</Comic>
+			<Comic href="http://www.stripteasecomic.com/" source="Keenspot">Striptease</Comic>
+			<Comic href="http://nopinkponies.keenspot.com/" source="Other">No Pink Ponies</Comic>
+			<Comic href="http://geebasonparade.com/" source="Other">Geebas On Parade</Comic>
+			<Comic href="http://www.vgcats.com/comics/" source="Other">VG Cats</Comic>
+			<Comic href="http://nerdcomics.com/mysterious/" source="Other">Mysterious Ways</Comic>
+			<Comic href="http://nodwick.humor.gamespy.com/ffn/index.php" source="Other">Full Frontal Nerdity</Comic>
+			<Comic href="http://www.johnnywander.com/" source="Other">Johnny Wander</Comic>
+			<Comic href="https://www.eviscerati.org/comics" source="Other">Help Desk</Comic>
+			<Comic href="http://www.goominet.com/unspeakable-vault/" source="Other">Unspeakable Vault</Comic>
+			<Comic href="http://www.thenoobcomic.com/index.php" source="Other">The Noob</Comic>
+			<Comic href="http://partiallyclips.com/" source="Other">Partially Clips</Comic>
+		</Category>
+
+		<Category name="Probationary">
+			<Comic href="http://ars.userfriendly.org/cartoons/" source="Other">User Friendly</Comic>
+			<Comic href="http://www.gpf-comics.com/" source="Other">General Protection Fault</Comic>
+			<Comic href="http://www.digitalunrestcomic.com/" source="Other">Digital Unrest</Comic>
+			<Comic href="http://speakwithmonsters.loresjoberg.com/" source="Other">Speak With Monsters</Comic>
+			<Comic href="http://apocrypha.loresjoberg.com/" source="Other">Apocrypha</Comic>
+			<Comic href="http://leth.smackjeeves.com/" source="Other">Leth Hate</Comic>
+
+		</Category>		
+
+		<Category name="Editorial Cartoons">
+			<OtherComic href="http://thisishistorictimes.com/" source="Editorial Cartoons">This is Historic Times</OtherComic>
+			<OtherComic href="http://mattbors.com/" source="Editorial Cartoons">Idiot Box</OtherComic>
+			<OtherComic href="http://www.aclu.org/standup/comics/index.php" source="Editorial Cartoons">Civil Discourse</OtherComic>
+			<OtherComic href="http://cagle.com/" source="Editorial Cartoons">Daryl Cagle's Professional Cartoonists Index</OtherComic>
+		</Category>
+
+		<Category name="Not Updating">
+			<OtherComic href="http://www.classicallypositive.net/" source="Not Updating">Classically Positive</OtherComic>
+			<OtherComic href="http://crap.jinwicked.com/" source="Not Updating">Crap I Drew On My Lunch Break</OtherComic>
+			<OtherComic href="http://marryme.keenspot.com/main/" source="Not Updating">Marry Me</OtherComic>
+			<OtherComic href="http://helensoti.blogspot.com/" source="Not Updating">Helen</OtherComic>
+			<OtherComic href="http://www.cigarro.ca/" source="Not Updating">Cigarro &amp; Cerveja</OtherComic>
+		</Category>
+
+		<Category name="Ended">
+			<OtherComic href="http://www.homeonthestrange.com/" source="Ended">Home on the Strange</OtherComic>
+			<OtherComic href="http://torio.comicgen.com/" source="Ended">Torio</OtherComic>
+			<OtherComic href="http://www.queenofwands.net/" source="Ended">Queen of Wands</OtherComic>
+			<OtherComic href="http://w00t.chaobell.net/" source="Ended">/usr/bin/w00t</OtherComic>
+		</Category>
+
+		<Category name="Not Safe for Work">
+			<OtherComic href="http://www.oglaf.com/" source="Not Safe for Work">Oglaf</OtherComic>
+			<OtherComic href="http://nsfw-comix.com/nsfw.htm" source="Not Safe for Work">NSFW</OtherComic>
+			<OtherComic href="http://www.sexylosers.com/" source="Not Safe for Work">Sexy Losers</OtherComic>
+			<OtherComic href="http://www.ghastlycomic.com/" source="Not Safe for Work">Ghastly's Ghastly Comic!</OtherComic>
+			<OtherComic href="http://www.illwillpress.com/" source="Not Safe for Work">Foamy the Squirrel</OtherComic>
+		</Category>
+
+		<Category name="More Comics">
+			<OtherComic href="http://www.archivebinge.net" source="More">Archive Binge</OtherComic>
+			<OtherComic href="http://www.robandjen.com/comics/" source="More">R&amp;J Comics Home</OtherComic>
+			<OtherComic href="http://www.chron.com/entertainment/comics-games/" source="More">Houston Chronicle</OtherComic>
+			<OtherComic href="http://www.gocomics.com/explore/comics" source="More">Go Comics</OtherComic>
+			<OtherComic href="http://onlinecomix.150m.com/day.htm" source="More">Online Comix</OtherComic>
+			<OtherComic href="http://news.yahoo.com/comics" source="More">Yahoo Comics</OtherComic>
+			<OtherComic href="http://www.creators.com/comics.html" source="More">Creators Syndicate</OtherComic>
+		</Category>
+	</Comics>
+
+	<Disclaimer>
+	This sidebar brought to you by
+		<a href="http://www.robandjen.com/rob" target="_content">Rob</a> and
+		<a href="http://www.robandjen.com" target="_content">Rob &amp; Jen's Place</a><br />
+		Updated 2:03 PM 8/15/2012
+	</Disclaimer>
+
+</ComicsPage>
