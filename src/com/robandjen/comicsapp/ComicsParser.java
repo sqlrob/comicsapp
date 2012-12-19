@@ -20,7 +20,7 @@ public class ComicsParser {
 		String curCategory = null;
 	
 		int eventId = parser.nextTag();
-		while (eventId != XmlPullParser.END_DOCUMENT) {
+		while (!(eventId == XmlPullParser.END_TAG && parser.getName().equals("Comics"))) {
 			if (eventId == XmlPullParser.START_TAG) {
 				if (parser.getName().equals("Category")) {
 					curCategory = parser.getAttributeValue(null, "name");
@@ -30,14 +30,10 @@ public class ComicsParser {
 					String curHref = parser.getAttributeValue(null,"href");
 					curlist.add(new ComicsEntry(curCategory,curSource,parser.nextText(),curHref));
 				}
-				else if (parser.getName().equals("OtherComic")) {
+				else if (parser.getName().equals("OtherComic")) { //Currently Ignored
 					parser.nextText();
 				}
 			}
-			else if (eventId == XmlPullParser.END_TAG && parser.getName().equals("Comics")) {
-				break;
-			}
-			
 			parser.nextTag();
 		}
 
