@@ -34,7 +34,7 @@ public class ComicsParser {
 					parser.nextText();
 				}
 			}
-			parser.nextTag();
+			eventId = parser.nextTag();
 		}
 
 		return curlist;
