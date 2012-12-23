@@ -2,6 +2,7 @@ package com.robandjen.comicsapp;
 
 import static org.junit.Assert.*;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
@@ -142,6 +143,15 @@ public class ComicsParserTest {
 		assertEquals("http://xkcd.com/",ce.getURL());
 		assertEquals("XKCD",ce.getName());
 		assertEquals("Other",ce.getSource());
+	}
+	
+	@Test
+	public void testDefaultXml() throws XmlPullParserException,IOException
+	{
+		FileReader fr = new FileReader("res/xml/comics.xml");
+		mParser.setInput(fr);
+		mList = ComicsParser.parse(mParser);
+		assertTrue(!mList.isEmpty());
 	}
 	
 }

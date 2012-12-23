@@ -7,11 +7,18 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.util.Log;
+
 public class ComicsParser {
 	
 	public static List<ComicsEntry> parse(XmlPullParser parser) throws XmlPullParserException,IOException {
 		
-		parser.next();
+		while (parser.getEventType() == XmlPullParser.START_DOCUMENT) {
+			parser.next();
+		}
+		
+		int tstid = parser.getEventType();
+		Log.v("test","Test Id=" + tstid);
 		parser.require(XmlPullParser.START_TAG, XmlPullParser.NO_NAMESPACE, "ComicsPage");
 		parser.nextTag();
 		parser.require(XmlPullParser.START_TAG, XmlPullParser.NO_NAMESPACE, "Comics");
