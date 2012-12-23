@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?><!-- Created by RMyers on July 14, 2001, 10:48 AM -->
-<?xml-stylesheet href="comics.xsl" type="text/xsl"?>
 
 <ComicsPage>
 <!--                 <Comic href="X" source="Other">XXXX</Comic> -->
@@ -150,12 +149,4 @@
 			<OtherComic href="http://www.creators.com/comics.html" source="More">Creators Syndicate</OtherComic>
 		</Category>
 	</Comics>
-
-	<Disclaimer>
-	This sidebar brought to you by
-		<a href="http://www.robandjen.com/rob" target="_content">Rob</a> and
-		<a href="http://www.robandjen.com" target="_content">Rob &amp; Jen's Place</a><br />
-		Updated 2:03 PM 8/15/2012
-	</Disclaimer>
-
 </ComicsPage>
