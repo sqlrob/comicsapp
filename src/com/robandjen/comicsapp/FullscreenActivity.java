@@ -83,6 +83,8 @@ public class FullscreenActivity extends Activity {
     		}
     	});
     	
+    	v.getSettings().setBuiltInZoomControls(true);
+    	
     	showCurrentComic();
     	
     }
