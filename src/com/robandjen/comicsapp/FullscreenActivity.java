@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 public class FullscreenActivity extends Activity {
 
@@ -40,6 +41,9 @@ public class FullscreenActivity extends Activity {
     void showCurrentComic() {
     	final WebView contentView = (WebView) findViewById(R.id.fullscreen_content);
     	contentView.loadUrl(mComicList.get(mCurComic).getURL());
+    	
+    	final TextView comicName = (TextView) findViewById(R.id.curcomic);
+    	comicName.setText(mComicList.get(mCurComic).getName());
     }
     
     void nextComic() {
