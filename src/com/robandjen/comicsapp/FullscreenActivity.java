@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class FullscreenActivity extends Activity {
@@ -87,7 +88,24 @@ public class FullscreenActivity extends Activity {
     		}
     	});
     	
+    	
     	v.getSettings().setBuiltInZoomControls(true);
+    	
+    	final Button next = (Button) findViewById(R.id.next);
+    	next.setOnClickListener(new View.OnClickListener() {
+    		@Override
+    		public void onClick(View v) {
+    			nextComic();
+    		}
+    	});
+    	
+    	final Button prev = (Button) findViewById(R.id.previous);
+    	prev.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				previousComic();
+			}
+		});
     	
     	showCurrentComic();
     	

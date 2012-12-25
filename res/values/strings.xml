@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Comics App</string>
     <string name="initial_comic_name">Current Comic</string> <!-- Should never be seen -->
+    <string name="lbl_previous">Previous</string>
+    <string name="lbl_next">Next</string>
 </resources>
