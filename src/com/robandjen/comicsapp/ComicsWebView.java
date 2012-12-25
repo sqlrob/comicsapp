@@ -30,7 +30,7 @@ public class ComicsWebView extends WebView {
 	GestureDetector mGestureDetect;
 	ComicsEvents mEvents;
 	static final float MAXTHRESHOLDY = 500f;
-	static final float MINTHRESHOLDX = 500f;
+	static final float MINTHRESHOLDX = 1500f;
 	public void setListener(ComicsEvents listener) {
 		mEvents = listener;
 	}
