@@ -21,11 +21,13 @@ package com.robandjen.comicsapp;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -84,7 +86,8 @@ public class FullscreenActivity extends Activity {
     }
     
 
-    @Override
+    @SuppressLint("SetJavaScriptEnabled")
+	@Override
     protected void onResume() {
     	super.onResume();
     	
@@ -108,7 +111,9 @@ public class FullscreenActivity extends Activity {
     	});
     	
     	
-    	v.getSettings().setBuiltInZoomControls(true);
+    	final WebSettings settings = v.getSettings();
+    	settings.setBuiltInZoomControls(true);
+    	settings.setJavaScriptEnabled(true);
     	
     	final Button next = (Button) findViewById(R.id.next);
     	next.setOnClickListener(new View.OnClickListener() {
