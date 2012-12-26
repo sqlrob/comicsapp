@@ -17,40 +17,45 @@
     along with ComicsApp.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package com.robandjen.comicsapp;
+package com.robandjen.comicsapp.test;
 
-import static org.junit.Assert.*;
-
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-public class ComicsParserTest {
+import com.robandjen.comicsapp.ComicsEntry;
+import com.robandjen.comicsapp.ComicsParser;
+import com.robandjen.comicsapp.R;
+
+import android.test.AndroidTestCase;
+
+public class ComicsParserTest extends AndroidTestCase {
 
 	XmlPullParser mParser;
 	List<ComicsEntry> mList;
 	
-	@Before
-	public void initParser() throws XmlPullParserException {
+	@Override
+	public void setUp() throws XmlPullParserException {
 		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 		mParser = factory.newPullParser();
 	}
 
-	@Test(expected=XmlPullParserException.class)
 	public void testEmptyParse() throws XmlPullParserException, IOException {
 		mParser.setInput(new StringReader(""));
-		mList = ComicsParser.parse(mParser);
-		assertTrue("List should be empty",mList.isEmpty());
+		try {
+			mList = ComicsParser.parse(mParser);
+			fail();
+		}
+		catch(XmlPullParserException e) {
+			
+		}
+		assertTrue("List should be empty",mList == null || mList.isEmpty());
 	}
 	
-	@Test
 	public void testSingle() throws XmlPullParserException,IOException {
 		mParser.setInput(new StringReader("<ComicsPage><Comics><Category name=\"first\">" +
 				"<Comic href=\"http://xkcd.com/\" source=\"Other\">XKCD</Comic>" + 
@@ -65,7 +70,6 @@ public class ComicsParserTest {
 		assertEquals("Other",ce.getSource());
 	}
 	
-	@Test
 	public void testMultiple() throws XmlPullParserException,IOException {
 		mParser.setInput(new StringReader("<ComicsPage><Comics><Category name=\"first\">" +
 				"<Comic href=\"http://xkcd.com/\" source=\"Other\">XKCD</Comic>" + 
@@ -87,7 +91,6 @@ public class ComicsParserTest {
 		assertEquals("Keenspot",ce.getSource());
 	}
 
-	@Test
 	public void testMultipleCategories() throws XmlPullParserException,IOException {
 		mParser.setInput(new StringReader("<ComicsPage><Comics><Category name=\"first\">" +
 				"<Comic href=\"http://xkcd.com/\" source=\"Other\">XKCD</Comic>" + 
@@ -119,7 +122,6 @@ public class ComicsParserTest {
 		assertEquals("Washington Post",ce.getSource());
 	}
 	
-	@Test
 	public void testOther() throws XmlPullParserException,IOException {
 		mParser.setInput(new StringReader("<ComicsPage><Comics><Category name=\"first\">" +
 				"<Comic href=\"http://xkcd.com/\" source=\"Other\">XKCD</Comic>" + 
@@ -142,7 +144,6 @@ public class ComicsParserTest {
 		assertEquals("Washington Post",ce.getSource());
 	}
 
-	@Test
 	public void testDisclaimer() throws XmlPullParserException,IOException {
 		mParser.setInput(new StringReader("<ComicsPage><Comics><Category name=\"first\">" +
 				"<Comic href=\"http://xkcd.com/\" source=\"Other\">XKCD</Comic>" + 
@@ -164,12 +165,9 @@ public class ComicsParserTest {
 		assertEquals("Other",ce.getSource());
 	}
 	
-	@Test
 	public void testDefaultXml() throws XmlPullParserException,IOException
 	{
-		FileReader fr = new FileReader("res/xml/comics.xml");
-		mParser.setInput(fr);
-		mList = ComicsParser.parse(mParser);
+		mList = ComicsParser.parse(getContext().getResources().getXml(R.xml.comics));
 		assertTrue(!mList.isEmpty());
 	}
 	
