@@ -39,12 +39,28 @@ public class FullscreenActivity extends Activity {
     private int mCurComic = 0;
     private static final String TAG = "ComicsAppWebActiviy";
     
+    private static final String CURCOMICKEY = "CurrentComic";
+    private static final String CURURLKEY = "CurrentURL";
+    
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_fullscreen);
 
+        final WebView v = (WebView) findViewById(R.id.fullscreen_content);
+        v.setWebViewClient(new WebViewClient() {
+    		@Override
+    		public boolean shouldOverrideUrlLoading(WebView view,String url) {
+    			return false;
+    		}
+    	});
+
+    	final WebSettings settings = v.getSettings();
+    	settings.setBuiltInZoomControls(true);
+    	settings.setJavaScriptEnabled(true);
+    	
         if (mComicList == null) {
         	try {
         		String xmlstring = getResources().getString(R.xml.comics);
@@ -58,14 +74,31 @@ public class FullscreenActivity extends Activity {
         	}
         }
         
+        
+        if (savedInstanceState != null) {
+        	mCurComic = savedInstanceState.getInt(CURCOMICKEY,0);
+        	final String url = savedInstanceState.getString(CURURLKEY);        	
+        	showCurrentComic(url); 	
+        }
+        else {
+        	showCurrentComic();
+        }
+  
     }
 
-    void showCurrentComic() {
-    	final WebView contentView = (WebView) findViewById(R.id.fullscreen_content);
-    	contentView.loadUrl(mComicList.get(mCurComic).getURL());
+    void showCurrentComic(String url) {
+    	if (url == null || url.isEmpty()) {
+    		url = mComicList.get(mCurComic).getName();
+    	}
     	
+    	final WebView contentView = (WebView) findViewById(R.id.fullscreen_content);
+    	contentView.loadUrl(url);
     	final TextView comicName = (TextView) findViewById(R.id.curcomic);
     	comicName.setText(mComicList.get(mCurComic).getName());
+    }
+    
+    void showCurrentComic() {
+    	showCurrentComic(mComicList.get(mCurComic).getURL());
     }
     
     void nextComic() {
@@ -85,8 +118,6 @@ public class FullscreenActivity extends Activity {
     	showCurrentComic();
     }
     
-
-    @SuppressLint("SetJavaScriptEnabled")
 	@Override
     protected void onResume() {
     	super.onResume();
@@ -102,18 +133,6 @@ public class FullscreenActivity extends Activity {
     			previousComic();
     		}
     	});
-    	
-    	v.setWebViewClient(new WebViewClient() {
-    		@Override
-    		public boolean shouldOverrideUrlLoading(WebView view,String url) {
-    			return false;
-    		}
-    	});
-    	
-    	
-    	final WebSettings settings = v.getSettings();
-    	settings.setBuiltInZoomControls(true);
-    	settings.setJavaScriptEnabled(true);
     	
     	final Button next = (Button) findViewById(R.id.next);
     	next.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +150,11 @@ public class FullscreenActivity extends Activity {
 			}
 		});
     	
-    	showCurrentComic();
-    	
+    }
+    
+    @Override
+    protected void onStart() {
+    	super.onStart();
     }
     
     @Override
@@ -142,4 +164,15 @@ public class FullscreenActivity extends Activity {
     	super.onStop();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+    	super.onSaveInstanceState(bundle);
+    	bundle.putInt(CURCOMICKEY, mCurComic);
+    	
+    	final WebView wv = (WebView) findViewById(R.id.fullscreen_content);
+    	if (wv != null) {
+    		bundle.putString(CURURLKEY, wv.getUrl());
+    	}
+    	
+    }
 }
