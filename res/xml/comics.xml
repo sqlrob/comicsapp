@@ -10,8 +10,10 @@
 			<Comic href="http://www.sheldoncomics.com/" source="Other">Sheldon</Comic>
 			<Comic href="http://www.questionablecontent.net/" source="Other">Questionable Content</Comic>
 			<Comic href="http://xkcd.com/" source="Other">XKCD</Comic>
+			<Comic href="http://www.smbc-comics.com/" source="Other">SMBC</Comic>
 			<Comic href="http://www.punchanpie.net/" source="Keenspot">Punch an' Pie</Comic>
 			<Comic href="http://www.leasticoulddo.com/" source="Other">Least I Could Do</Comic>
+			<Comic href="http://ftf-comics.com/" source="Other">Failure To Fire</Comic>
 			<Comic href="http://www.girlswithslingshots.com/" source="Other">Girls With Slingshots</Comic>
 			<Comic href="http://www.sinfest.net/index.php" source="Other">Sinfest</Comic>
 			<Comic href="http://candicomics.com/" source="Other">Candi</Comic>
@@ -42,6 +44,7 @@
 			<Comic href="http://penny-arcade.com/comic" source="Other">Penny Arcade</Comic>
 			<Comic href="http://pvponline.com/comic" source="Other">PvP</Comic>
 			<Comic href="http://www.unshelved.com/" source="Other">Unshelved</Comic>
+			<Comic href="http://ars.userfriendly.org/cartoons/" source="Other">User Friendly</Comic>
 			<Comic href="http://www.gocomics.com/brewsterrockit/" source="GoComics">Brewster Rockit</Comic>
 			<Comic href="http://www.gocomics.com/overthehedge/" source="GoComics">Over the Hedge</Comic>
 			<Comic href="http://www.gocomics.com/poochcafe/" source="GoComics">Pooch Cafe</Comic>
@@ -69,31 +72,30 @@
 		<Category name="Semi-Weekly">
 			<Comic href="http://www.foxtrot.com/" source="Other">Foxtrot</Comic>
 			<Comic href="http://somethingpositive.net/index.html" source="Other">Something Positive</Comic>
+			<Comic href="http://www.drivecomic.com/" source="Other">Drive</Comic>
 			<Comic href="http://www.twolumps.net/" source="Other">Two Lumps</Comic>
 			<Comic href="http://basicinstructions.net/" source="Other">Basic Instructions</Comic>
 			<Comic href="http://www.reallifecomics.com/" source="Other">Real Life</Comic>
 			<Comic href="http://www.sexdrugsandjunecleaver.com/" source="Other">Sex, Drugs, &amp; June Cleaver</Comic>
 			<Comic href="http://hijinksensue.com/" source="Other">Hijinks Ensue</Comic>
+			<Comic href="http://www.gppcomic.com/" source="Other">Gods Playing Poker</Comic>
 			<Comic href="http://www.shesalmostnormal.com/" source="Other">Almost Normal</Comic>
 			<Comic href="http://www.asofterworld.com/index.php" source="Other">A Softer World</Comic>
 			<Comic href="http://www.amazingsuperpowers.com/" source="Other">Amazing Super Powers</Comic>
 			<Comic href="http://www.joyoftech.com/joyoftech/index.html" source="Other">Joy of Tech</Comic>
 			<Comic href="http://www.cad-comic.com/sillies/" source="Other">CAD Sillies</Comic>
-			<Comic href="http://www.livingwithinsanity.com/index/" source="Other">Living With Insanity</Comic>
 			<Comic href="http://eddirt.frozenreality.co.uk/index.php" source="Other">Edible Dirt</Comic>
 		</Category>
 
 		<Category name="Whenever">
 			<Comic href="http://dollar.jinwicked.com/" source="Other">A Dollar Late</Comic>
-			<Comic href="http://www.viruscomix.com/subnormality.html" source="Other">Subnormality</Comic>
+			<Comic href="http://www.thatdeafguy.com/" source="Other">That Deaf Guy</Comic>
+			<Comic href="http://bradcolbow.com/" source="Other">The Brads</Comic>
 			<Comic href="http://www.awkwardzombie.com/" source="Other">Awkward Zombie</Comic>
-			<Comic href="http://www.stripteasecomic.com/" source="Keenspot">Striptease</Comic>
 			<Comic href="http://nopinkponies.keenspot.com/" source="Other">No Pink Ponies</Comic>
 			<Comic href="http://geebasonparade.com/" source="Other">Geebas On Parade</Comic>
 			<Comic href="http://www.vgcats.com/comics/" source="Other">VG Cats</Comic>
 			<Comic href="http://nerdcomics.com/mysterious/" source="Other">Mysterious Ways</Comic>
-			<Comic href="http://nodwick.humor.gamespy.com/ffn/index.php" source="Other">Full Frontal Nerdity</Comic>
-			<Comic href="http://www.johnnywander.com/" source="Other">Johnny Wander</Comic>
 			<Comic href="https://www.eviscerati.org/comics" source="Other">Help Desk</Comic>
 			<Comic href="http://www.goominet.com/unspeakable-vault/" source="Other">Unspeakable Vault</Comic>
 			<Comic href="http://www.thenoobcomic.com/index.php" source="Other">The Noob</Comic>
@@ -101,35 +103,13 @@
 		</Category>
 
 		<Category name="Probationary">
-			<Comic href="http://ars.userfriendly.org/cartoons/" source="Other">User Friendly</Comic>
-			<Comic href="http://www.gpf-comics.com/" source="Other">General Protection Fault</Comic>
-			<Comic href="http://www.digitalunrestcomic.com/" source="Other">Digital Unrest</Comic>
-			<Comic href="http://speakwithmonsters.loresjoberg.com/" source="Other">Speak With Monsters</Comic>
-			<Comic href="http://apocrypha.loresjoberg.com/" source="Other">Apocrypha</Comic>
-			<Comic href="http://leth.smackjeeves.com/" source="Other">Leth Hate</Comic>
-
-		</Category>		
+		</Category>
 
 		<Category name="Editorial Cartoons">
 			<OtherComic href="http://thisishistorictimes.com/" source="Editorial Cartoons">This is Historic Times</OtherComic>
 			<OtherComic href="http://mattbors.com/" source="Editorial Cartoons">Idiot Box</OtherComic>
 			<OtherComic href="http://www.aclu.org/standup/comics/index.php" source="Editorial Cartoons">Civil Discourse</OtherComic>
 			<OtherComic href="http://cagle.com/" source="Editorial Cartoons">Daryl Cagle's Professional Cartoonists Index</OtherComic>
-		</Category>
-
-		<Category name="Not Updating">
-			<OtherComic href="http://www.classicallypositive.net/" source="Not Updating">Classically Positive</OtherComic>
-			<OtherComic href="http://crap.jinwicked.com/" source="Not Updating">Crap I Drew On My Lunch Break</OtherComic>
-			<OtherComic href="http://marryme.keenspot.com/main/" source="Not Updating">Marry Me</OtherComic>
-			<OtherComic href="http://helensoti.blogspot.com/" source="Not Updating">Helen</OtherComic>
-			<OtherComic href="http://www.cigarro.ca/" source="Not Updating">Cigarro &amp; Cerveja</OtherComic>
-		</Category>
-
-		<Category name="Ended">
-			<OtherComic href="http://www.homeonthestrange.com/" source="Ended">Home on the Strange</OtherComic>
-			<OtherComic href="http://torio.comicgen.com/" source="Ended">Torio</OtherComic>
-			<OtherComic href="http://www.queenofwands.net/" source="Ended">Queen of Wands</OtherComic>
-			<OtherComic href="http://w00t.chaobell.net/" source="Ended">/usr/bin/w00t</OtherComic>
 		</Category>
 
 		<Category name="Not Safe for Work">
@@ -139,6 +119,34 @@
 			<OtherComic href="http://www.ghastlycomic.com/" source="Not Safe for Work">Ghastly's Ghastly Comic!</OtherComic>
 			<OtherComic href="http://www.illwillpress.com/" source="Not Safe for Work">Foamy the Squirrel</OtherComic>
 		</Category>
+
+		<Category name="Not Updating">
+			<OtherComic href="http://www.classicallypositive.net/" source="Not Updating">Classically Positive</OtherComic>
+			<OtherComic href="http://crap.jinwicked.com/" source="Not Updating">Crap I Drew On My Lunch Break</OtherComic>
+			<OtherComic href="http://marryme.keenspot.com/main/" source="Not Updating">Marry Me</OtherComic>
+			<OtherComic href="http://helensoti.blogspot.com/" source="Not Updating">Helen</OtherComic>
+			<OtherComic href="http://www.cigarro.ca/" source="Not Updating">Cigarro &amp; Cerveja</OtherComic>
+			<OtherComic href="http://www.digitalunrestcomic.com/" source="Other">Digital Unrest</OtherComic>
+			<OtherComic href="http://speakwithmonsters.loresjoberg.com/" source="Other">Speak With Monsters</OtherComic>
+			<OtherComic href="http://apocrypha.loresjoberg.com/" source="Other">Apocrypha</OtherComic>
+		</Category>
+
+		<Category name="Ended">
+			<OtherComic href="http://www.homeonthestrange.com/" source="Ended">Home on the Strange</OtherComic>
+			<OtherComic href="http://torio.comicgen.com/" source="Ended">Torio</OtherComic>
+			<OtherComic href="http://www.queenofwands.net/" source="Ended">Queen of Wands</OtherComic>
+			<OtherComic href="http://w00t.chaobell.net/" source="Ended">/usr/bin/w00t</OtherComic>
+		</Category>
+
+<!-- 		<Category name="Removed">
+			<OtherComic href="http://www.stripteasecomic.com/" source="Keenspot">Striptease</OtherComic>
+			<OtherComic href="http://www.viruscomix.com/subnormality.html" source="Other">Subnormality</OtherComic>
+			<OtherComic href="http://www.livingwithinsanity.com/index/" source="Other">Living With Insanity</OtherComic>
+			<OtherComic href="http://nodwick.humor.gamespy.com/ffn/index.php" source="Other">Full Frontal Nerdity</OtherComic>
+			<OtherComic href="http://www.johnnywander.com/" source="Other">Johnny Wander</OtherComic>
+			<OtherComic href="http://www.gpf-comics.com/" source="Other">General Protection Fault</OtherComic>
+			<OtherComic href="http://leth.smackjeeves.com/" source="Other">Leth Hate</OtherComic>
+		</Category> -->
 
 		<Category name="More Comics">
 			<OtherComic href="http://www.archivebinge.net" source="More">Archive Binge</OtherComic>
@@ -150,4 +158,12 @@
 			<OtherComic href="http://www.creators.com/comics.html" source="More">Creators Syndicate</OtherComic>
 		</Category>
 	</Comics>
+
+	<Disclaimer>
+	This sidebar brought to you by
+		<a href="http://www.robandjen.com/rob" target="_content">Rob</a> and
+		<a href="http://www.robandjen.com" target="_content">Rob &amp; Jen's Place</a><br />
+		Updated 9:08 AM December 27, 2012
+	</Disclaimer>
+
 </ComicsPage>
