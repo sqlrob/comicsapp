@@ -22,16 +22,21 @@ package com.robandjen.comicsapp;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ShareActionProvider;
 
 public class FullscreenActivity extends Activity {
 
@@ -53,6 +58,7 @@ public class FullscreenActivity extends Activity {
         v.setWebViewClient(new WebViewClient() {
     		@Override
     		public boolean shouldOverrideUrlLoading(WebView view,String url) {
+    			updateShare(url);
     			return false;
     		}
     	});
@@ -88,13 +94,16 @@ public class FullscreenActivity extends Activity {
 
     void showCurrentComic(String url) {
     	if (url == null || url.isEmpty()) {
-    		url = mComicList.get(mCurComic).getName();
+    		url = mComicList.get(mCurComic).getURL();
     	}
     	
     	final WebView contentView = (WebView) findViewById(R.id.fullscreen_content);
     	contentView.loadUrl(url);
-    	final TextView comicName = (TextView) findViewById(R.id.curcomic);
-    	comicName.setText(mComicList.get(mCurComic).getName());
+    	ActionBar actionBar = getActionBar();
+    	if (actionBar != null) {
+    		actionBar.setTitle(mComicList.get(mCurComic).getName());
+    	}
+    	updateShare(url);
     }
     
     void showCurrentComic() {
@@ -174,5 +183,29 @@ public class FullscreenActivity extends Activity {
     		bundle.putString(CURURLKEY, wv.getUrl());
     	}
     	
+    }
+    
+    
+    ShareActionProvider mShareProvider;
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.mainmenu, menu);
+    	
+    	MenuItem shareitem = menu.findItem(R.id.menu_share);
+    	mShareProvider = (ShareActionProvider) shareitem.getActionProvider();
+    	
+    	return super.onCreateOptionsMenu(menu);
+    }
+    
+    private void updateShare(String url) {
+    	if (mShareProvider != null) {
+	    	Intent intent = new Intent();
+	    	intent.setAction(Intent.ACTION_SEND);
+	    	intent.setType("text/plain");
+	    	intent.putExtra(Intent.EXTRA_TEXT,url);
+	    	mShareProvider.setShareIntent(intent);
+    	}
     }
 }
