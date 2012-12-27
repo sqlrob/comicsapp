@@ -187,6 +187,7 @@ public class FullscreenActivity extends Activity {
     
     
     ShareActionProvider mShareProvider;
+    Intent mShareIntent;
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -195,17 +196,18 @@ public class FullscreenActivity extends Activity {
     	
     	MenuItem shareitem = menu.findItem(R.id.menu_share);
     	mShareProvider = (ShareActionProvider) shareitem.getActionProvider();
-    	
+    	if (mShareProvider != null) {
+	    	mShareIntent = new Intent();
+	    	mShareIntent.setAction(Intent.ACTION_SEND);
+	    	mShareIntent.setType("text/plain");
+	    	mShareProvider.setShareIntent(mShareIntent);
+    	}
     	return super.onCreateOptionsMenu(menu);
     }
     
     private void updateShare(String url) {
-    	if (mShareProvider != null) {
-	    	Intent intent = new Intent();
-	    	intent.setAction(Intent.ACTION_SEND);
-	    	intent.setType("text/plain");
-	    	intent.putExtra(Intent.EXTRA_TEXT,url);
-	    	mShareProvider.setShareIntent(intent);
+    	if (mShareIntent != null) {
+	    	mShareIntent.putExtra(Intent.EXTRA_TEXT,url);
     	}
     }
 }
