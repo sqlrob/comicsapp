@@ -27,6 +27,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,7 +36,10 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ShareActionProvider;
 
 public class FullscreenActivity extends Activity {
@@ -81,6 +85,22 @@ public class FullscreenActivity extends Activity {
         }
         
         
+        if (mComicList != null) {
+        	ListView lv = (ListView) findViewById(R.id.comic_drawer);
+        	lv.setAdapter(new ArrayAdapter<ComicsEntry>(getApplicationContext(),R.layout.comic_view,mComicList));
+        	lv.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					mCurComic = position;
+					showCurrentComic();
+					DrawerLayout dl = (DrawerLayout) findViewById(R.id.drawer_layout);
+					dl.closeDrawers();
+				}
+			});
+        }
+        
         if (savedInstanceState != null) {
         	mCurComic = savedInstanceState.getInt(CURCOMICKEY,0);
         	final String url = savedInstanceState.getString(CURURLKEY);        	
@@ -104,6 +124,10 @@ public class FullscreenActivity extends Activity {
     		actionBar.setTitle(mComicList.get(mCurComic).getName());
     	}
     	updateShare(url);
+    	
+    	ListView lv = (ListView) findViewById(R.id.comic_drawer);
+    	lv.setSelection(mCurComic);
+    	lv.setItemChecked(mCurComic, true);
     }
     
     void showCurrentComic() {
