@@ -90,5 +90,10 @@ public class ComicsEntry {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return mName;
+	}
 	
 }
