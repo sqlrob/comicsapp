@@ -25,8 +25,10 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -50,6 +52,8 @@ public class FullscreenActivity extends Activity {
     
     private static final String CURCOMICKEY = "CurrentComic";
     private static final String CURURLKEY = "CurrentURL";
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
     
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -70,6 +74,13 @@ public class FullscreenActivity extends Activity {
     	final WebSettings settings = v.getSettings();
     	settings.setBuiltInZoomControls(true);
     	settings.setJavaScriptEnabled(true);
+    	
+    	mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    	mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_drawer,R.string.open_drawer,R.string.close_drawer);
+    	mDrawerLayout.setDrawerListener(mDrawerToggle);
+    	
+    	getActionBar().setHomeButtonEnabled(true);
+    	getActionBar().setDisplayHomeAsUpEnabled(true);
     	
         if (mComicList == null) {
         	try {
@@ -95,8 +106,7 @@ public class FullscreenActivity extends Activity {
 						int position, long id) {
 					mCurComic = position;
 					showCurrentComic();
-					DrawerLayout dl = (DrawerLayout) findViewById(R.id.drawer_layout);
-					dl.closeDrawers();
+					mDrawerLayout.closeDrawers();
 				}
 			});
         }
@@ -234,4 +244,24 @@ public class FullscreenActivity extends Activity {
 	    	mShareIntent.putExtra(Intent.EXTRA_TEXT,url);
     	}
     }
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }

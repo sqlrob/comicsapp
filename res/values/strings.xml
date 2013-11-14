@@ -4,4 +4,6 @@
     <string name="initial_comic_name">Current Comic</string> <!-- Should never be seen -->
     <string name="lbl_previous">Previous</string>
     <string name="lbl_next">Next</string>
+    <string name="open_drawer">Open Comics List</string>
+    <string name="close_drawer">Close Comics List</string>
 </resources>
