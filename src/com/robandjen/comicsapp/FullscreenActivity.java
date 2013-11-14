@@ -35,6 +35,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebBackForwardList;
+import android.webkit.WebHistoryItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -128,7 +130,12 @@ public class FullscreenActivity extends Activity {
     	}
     	
     	final WebView contentView = (WebView) findViewById(R.id.fullscreen_content);
+    	contentView.stopLoading();
+    	
+    	//Load about:blank to clear any extra data and have a well defined URL in history
+    	contentView.loadUrl("about:blank");
     	contentView.loadUrl(url);
+    	contentView.clearHistory();
     	ActionBar actionBar = getActionBar();
     	if (actionBar != null) {
     		actionBar.setTitle(mComicList.get(mCurComic).getName());
@@ -263,5 +270,26 @@ public class FullscreenActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onBackPressed() {
+		ComicsWebView wv = (ComicsWebView) findViewById(R.id.fullscreen_content);
+		if (wv.canGoBack()) {
+			
+			//I couldn't remove every URL from the list, so stop when I hit
+			//about:blank, I'm all the way back then
+			WebBackForwardList bdl = wv.copyBackForwardList();
+			final int cur = bdl.getCurrentIndex() - 1;
+			if (cur >= 0) {
+				WebHistoryItem whi = bdl.getItemAtIndex(cur);
+				String url = whi.getUrl();
+				if (!url.equals("about:blank")) {
+					wv.goBack();
+				}
+			}
+			
+		}
+		
 	}
 }
