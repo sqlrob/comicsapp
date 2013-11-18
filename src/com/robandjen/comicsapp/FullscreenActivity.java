@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -285,16 +286,27 @@ public class FullscreenActivity extends Activity {
 			return true;
 		}
 
-		if (item.getItemId() == R.id.menu_reload) {
+		final int id = item.getItemId();
+		
+		if (id == R.id.menu_reload) {
 			onReload();
 			return true;
 		}
 
-		if (item.getItemId() == R.id.menu_cancel) {
+		if (id == R.id.menu_cancel) {
 			onCancel();
 			return true;
 		}
 
+		if (id == R.id.menu_browser) {
+			
+			WebView wv = (WebView) findViewById(R.id.fullscreen_content);
+			String url = wv.getUrl();
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			startActivity(intent);
+			return true;
+		}
+	
 		return super.onOptionsItemSelected(item);
 	}
 

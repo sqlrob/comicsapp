@@ -11,4 +11,6 @@
         android:actionProviderClass="android.widget.ShareActionProvider" 
         android:icon="@android:drawable/ic_menu_share"
         />
+    
+    <item android:id="@+id/menu_browser" android:title="@string/open_in_browser" />
 </menu>
