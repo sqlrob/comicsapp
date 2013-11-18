@@ -27,6 +27,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.XmlResourceParser;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -35,6 +36,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebHistoryItem;
 import android.webkit.WebSettings;
@@ -62,6 +64,7 @@ public class FullscreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_fullscreen);
 
         final WebView v = (WebView) findViewById(R.id.fullscreen_content);
@@ -71,6 +74,18 @@ public class FullscreenActivity extends Activity {
     			updateShare(url);
     			return false;
     		}
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				setProgressBarIndeterminateVisibility(false);
+				super.onPageFinished(view, url);
+			}
+
+			@Override
+			public void onPageStarted(WebView view, String url, Bitmap favicon) {
+				setProgressBarIndeterminateVisibility(true);
+				super.onPageStarted(view, url, favicon);
+			}
     	});
 
     	final WebSettings settings = v.getSettings();
