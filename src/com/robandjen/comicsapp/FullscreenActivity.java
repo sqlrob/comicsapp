@@ -269,6 +269,12 @@ public class FullscreenActivity extends Activity {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
+
+		if (item.getItemId() == R.id.menu_reload) {
+			onReload();
+			return true;
+		}
+
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -291,5 +297,10 @@ public class FullscreenActivity extends Activity {
 			
 		}
 		
+	}
+
+	private void onReload() {
+		WebView wv = (WebView) findViewById(R.id.fullscreen_content);
+		wv.reload();
 	}
 }

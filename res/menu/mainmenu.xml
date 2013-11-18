@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/menu_reload" android:icon="@drawable/ic_action_refresh" android:title="@string/reload"
+        android:showAsAction="ifRoom" />
+
     <item android:id="@+id/menu_share" android:showAsAction="ifRoom" android:title="Share" 
         android:actionProviderClass="android.widget.ShareActionProvider" 
         android:icon="@android:drawable/ic_menu_share"

@@ -6,4 +6,5 @@
     <string name="lbl_next">Next</string>
     <string name="open_drawer">Open Comics List</string>
     <string name="close_drawer">Close Comics List</string>
+    <string name="reload">Reload</string>
 </resources>
