@@ -19,14 +19,19 @@
 
 package com.robandjen.comicsapp;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -101,15 +106,27 @@ public class FullscreenActivity extends Activity {
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	
         if (mComicList == null) {
+        	InputStream is = null;
         	try {
-        		String xmlstring = getResources().getString(R.xml.comics);
-        		Log.v(TAG,xmlstring);
-        		XmlResourceParser parser = getResources().getXml(R.xml.comics);
+        		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+        		XmlPullParser parser = factory.newPullParser();
+        		is = getAssets().open("comics.xml");
+        		parser.setInput(new BufferedInputStream(is), null);
         		mComicList = ComicsParser.parse(parser);
         	}
         	catch (Exception e) {
         		//TODO: Cleanly exit, no valid XML. Shouldn't happen with embedded one
         		Log.e(TAG, "Unable to parse XML", e);
+        	}
+        	finally {
+        		if (is != null) {
+        			try {
+						is.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        		}
         	}
         }
         

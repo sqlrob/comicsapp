@@ -170,7 +170,19 @@ public class ComicsParserTest extends InstrumentationTestCase {
 	
 	public void testDefaultXml() throws XmlPullParserException,IOException
 	{
-		mList = ComicsParser.parse(getInstrumentation().getTargetContext().getResources().getXml(R.xml.comics));
+		InputStream is = null;
+		Context ctx = getInstrumentation().getTargetContext();
+		try {
+			is = ctx.getAssets().open("comics.xml");
+			mParser.setInput(new BufferedInputStream(is), null);
+			mList = ComicsParser.parse(mParser);
+		}
+		finally {
+			if (is != null) {
+				is.close();
+			}
+		}
+		
 		assertTrue(!mList.isEmpty());
 	}
 
@@ -181,7 +193,7 @@ public class ComicsParserTest extends InstrumentationTestCase {
 		try {
 			is = ctx.getAssets().open("comics-test.xml");
 			mParser.setInput(new BufferedInputStream(is), null);
-			mList = ComicsParser.parse(getInstrumentation().getTargetContext().getResources().getXml(R.xml.comics));
+			mList = ComicsParser.parse(mParser);
 		}
 		finally {
 			if (is != null) {
