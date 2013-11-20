@@ -19,7 +19,9 @@
 
 package com.robandjen.comicsapp.test;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.util.List;
 
@@ -31,9 +33,10 @@ import com.robandjen.comicsapp.ComicsEntry;
 import com.robandjen.comicsapp.ComicsParser;
 import com.robandjen.comicsapp.R;
 
-import android.test.AndroidTestCase;
+import android.content.Context;
+import android.test.InstrumentationTestCase;
 
-public class ComicsParserTest extends AndroidTestCase {
+public class ComicsParserTest extends InstrumentationTestCase {
 
 	XmlPullParser mParser;
 	List<ComicsEntry> mList;
@@ -167,8 +170,25 @@ public class ComicsParserTest extends AndroidTestCase {
 	
 	public void testDefaultXml() throws XmlPullParserException,IOException
 	{
-		mList = ComicsParser.parse(getContext().getResources().getXml(R.xml.comics));
+		mList = ComicsParser.parse(getInstrumentation().getTargetContext().getResources().getXml(R.xml.comics));
 		assertTrue(!mList.isEmpty());
 	}
-	
+
+	public void testRawXml() throws XmlPullParserException, IOException {
+		Context ctx = getInstrumentation().getContext();
+		
+		InputStream is = null;
+		try {
+			is = ctx.getAssets().open("comics-test.xml");
+			mParser.setInput(new BufferedInputStream(is), null);
+			mList = ComicsParser.parse(getInstrumentation().getTargetContext().getResources().getXml(R.xml.comics));
+		}
+		finally {
+			if (is != null) {
+				is.close();
+			}
+		}
+		
+		assertTrue(!mList.isEmpty());
+	}
 }
