@@ -115,11 +115,10 @@ public class FullscreenActivity extends Activity implements DownloadResults {
         if (mComicList == null) {
         	InputStream is = null;
         	try {
-        		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-        		XmlPullParser parser = factory.newPullParser();
         		is = getAssets().open("comics.xml");
-        		parser.setInput(new BufferedInputStream(is), null);
-        		mComicList = ComicsParser.parse(parser);
+        		if (!setComicsXml(is)) {
+        			Log.wtf(TAG,"Failed to do initial parse");
+        		}
         	}
         	catch (Exception e) {
         		//TODO: Cleanly exit, no valid XML. Shouldn't happen with embedded one
@@ -135,22 +134,6 @@ public class FullscreenActivity extends Activity implements DownloadResults {
 					}
         		}
         	}
-        }
-        
-        
-        if (mComicList != null) {
-        	ListView lv = (ListView) findViewById(R.id.comic_drawer);
-        	lv.setAdapter(new ArrayAdapter<ComicsEntry>(getApplicationContext(),R.layout.comic_view,mComicList));
-        	lv.setOnItemClickListener(new ListView.OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					mCurComic = position;
-					showCurrentComic();
-					mDrawerLayout.closeDrawers();
-				}
-			});
         }
         
         if (savedInstanceState != null) {
@@ -396,4 +379,37 @@ public class FullscreenActivity extends Activity implements DownloadResults {
 			Toast.makeText(this, String.format(format,e.getClass().toString()), Toast.LENGTH_LONG).show();
 		}
 	}
+	
+	boolean setComicsXml(InputStream is) {
+		try {
+	   		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+    		XmlPullParser parser = factory.newPullParser();
+    		parser.setInput(new BufferedInputStream(is), null);
+    		mComicList = ComicsParser.parse(parser);
+		}
+		catch (Exception e) {
+			return false;
+		}
+		
+		//Reset to beginning
+		mCurComic = 0;
+		
+		if (mComicList != null) {
+        	ListView lv = (ListView) findViewById(R.id.comic_drawer);
+        	lv.setAdapter(new ArrayAdapter<ComicsEntry>(getApplicationContext(),R.layout.comic_view,mComicList));
+        	lv.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					mCurComic = position;
+					showCurrentComic();
+					mDrawerLayout.closeDrawers();
+				}
+			});
+        }
+		
+		return true;
+	}
+	
 }
