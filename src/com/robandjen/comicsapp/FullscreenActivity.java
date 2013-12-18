@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -37,6 +38,7 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -72,6 +74,8 @@ public class FullscreenActivity extends Activity implements DownloadResults {
     private static final String CURURLKEY = "CurrentURL";
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    
+    private static final String COMICFILE = "comics.xml";
     
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -114,27 +118,28 @@ public class FullscreenActivity extends Activity implements DownloadResults {
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	
         if (mComicList == null) {
-        	InputStream is = null;
-        	try {
-        		is = getAssets().open("comics.xml");
-        		if (!setComicsXml(is)) {
-        			Log.wtf(TAG,"Failed to do initial parse");
-        		}
-        	}
-        	catch (Exception e) {
-        		//TODO: Cleanly exit, no valid XML. Shouldn't happen with embedded one
-        		Log.e(TAG, "Unable to parse XML", e);
-        	}
-        	finally {
-        		if (is != null) {
-        			try {
-						is.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-        		}
-        	}
+        	
+			try {
+				InputStream is = openFileInput(COMICFILE);
+				if (!loadXml(is)) {
+					Log.w(TAG,"Downloaded list not parseable, defaulting to built-in");
+				}
+			} catch (FileNotFoundException e) {
+				Log.i(TAG,"Downloaded list not found, defaulting to built-in");
+				
+			}
+        }
+        
+        if (mComicList == null) {
+        	InputStream is;
+			try {
+				is = getAssets().open(COMICFILE);
+				loadXml(is);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
         }
         
         if (savedInstanceState != null) {
@@ -416,6 +421,45 @@ public class FullscreenActivity extends Activity implements DownloadResults {
 	}
 	
 	boolean setComicsXml(String xml) {
-		return setComicsXml(new ByteArrayInputStream(xml.getBytes()));
+		boolean succeeded = setComicsXml(new ByteArrayInputStream(xml.getBytes()));
+		OutputStream os = null;
+		try {
+			os = openFileOutput(COMICFILE, Context.MODE_PRIVATE);
+			os.write(xml.getBytes());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			if (os != null) {
+				try {
+					os.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return succeeded;
 	}
+	
+	boolean loadXml(InputStream is) {
+		try {
+			return setComicsXml(is);
+		}
+		finally {
+			try {
+				is.close();
+			}
+			catch (Exception e) {
+				Log.e(TAG,"Unable to close stream",e);
+			}
+		}
+		
+	}
+	
 }
