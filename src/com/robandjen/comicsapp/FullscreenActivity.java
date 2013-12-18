@@ -20,6 +20,7 @@
 package com.robandjen.comicsapp;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -361,7 +362,9 @@ public class FullscreenActivity extends Activity implements DownloadResults {
 
 	@Override
 	public void onDownloadComplete(String results) {
-		Toast.makeText(this, "Download completed", Toast.LENGTH_LONG).show();
+		if (setComicsXml(results)) {
+			showCurrentComic();
+		}
 	}
 
 	@Override
@@ -412,4 +415,7 @@ public class FullscreenActivity extends Activity implements DownloadResults {
 		return true;
 	}
 	
+	boolean setComicsXml(String xml) {
+		return setComicsXml(new ByteArrayInputStream(xml.getBytes()));
+	}
 }
