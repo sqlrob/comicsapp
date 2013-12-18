@@ -13,4 +13,6 @@
         />
     
     <item android:id="@+id/menu_browser" android:title="@string/open_in_browser" />
+    
+    <item android:id="@+id/download" android:title="@string/download" />
 </menu>

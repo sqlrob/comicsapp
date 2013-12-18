@@ -10,4 +10,9 @@
     <string name="cancel">Cancel</string>
     <string name="share">Share</string>
     <string name="open_in_browser">Open in browser</string>
+    <string name="download">Download new comics list&#8230;</string>
+    <string name="in_progress">Downloading latest list</string>
+    <string name="http_error">Download failed with HTTP Error code %1$d</string>
+    <string name="http_exception">Download failed with exception %1$s</string>
+    <string name="http_not_found">Comics list not found on server</string>
 </resources>

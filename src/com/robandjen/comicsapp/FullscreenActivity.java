@@ -20,16 +20,22 @@
 package com.robandjen.comicsapp;
 
 import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import com.robandjen.comicsapp.DownloadTask.DownloadResults;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -53,8 +59,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
+import android.widget.Toast;
 
-public class FullscreenActivity extends Activity {
+public class FullscreenActivity extends Activity implements DownloadResults {
 
     private List<ComicsEntry> mComicList;
     private int mCurComic = 0;
@@ -324,6 +331,17 @@ public class FullscreenActivity extends Activity {
 			return true;
 		}
 	
+		if (id == R.id.download) {
+			try {
+				DownloadFragment df = DownloadFragment.newInstance(new URL("http://www.robandjen.com/comics/comics.xml"));
+				FragmentManager fm = getFragmentManager();
+				df.show(fm, "download");
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -356,5 +374,26 @@ public class FullscreenActivity extends Activity {
 	private void onCancel() {
 		WebView wv = (WebView) findViewById(R.id.fullscreen_content);
 		wv.stopLoading();
+	}
+
+	@Override
+	public void onDownloadComplete(String results) {
+		Toast.makeText(this, "Download completed", Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	public void onDownloadFailed(int code) {
+		String format = getString(R.string.http_error);
+		Toast.makeText(this, String.format(format, code), Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	public void onDownloadFailed(Exception e) {
+		if (e instanceof FileNotFoundException) {
+			Toast.makeText(this, getString(R.string.http_not_found), Toast.LENGTH_LONG).show();
+		} else {
+			String format = getString(R.string.http_exception);
+			Toast.makeText(this, String.format(format,e.getClass().toString()), Toast.LENGTH_LONG).show();
+		}
 	}
 }
