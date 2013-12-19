@@ -25,7 +25,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -37,7 +36,6 @@ import com.robandjen.comicsapp.DownloadTask.DownloadResults;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -64,7 +62,7 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
-public class FullscreenActivity extends Activity implements DownloadResults {
+public class FullscreenActivity extends Activity implements DownloadResults, URLFragment.URLEvent {
 
     private List<ComicsEntry> mComicList;
     private int mCurComic = 0;
@@ -321,16 +319,10 @@ public class FullscreenActivity extends Activity implements DownloadResults {
 		}
 	
 		if (id == R.id.download) {
-			try {
-				DownloadFragment df = DownloadFragment.newInstance(new URL("http://www.robandjen.com/comics/comics.xml"));
-				FragmentManager fm = getFragmentManager();
-				df.show(fm, "download");
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			URLFragment uf = URLFragment.newInstance();
+			uf.show(getFragmentManager(), "url");
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -461,5 +453,10 @@ public class FullscreenActivity extends Activity implements DownloadResults {
 		}
 		
 	}
-	
+
+	@Override
+	public void onURLChosen(URL Url) {
+		DownloadFragment df = DownloadFragment.newInstance(Url);
+		df.show(getFragmentManager(), "download");
+	}
 }

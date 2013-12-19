@@ -15,4 +15,6 @@
     <string name="http_error">Download failed with HTTP Error code %1$d</string>
     <string name="http_exception">Download failed with exception %1$s</string>
     <string name="http_not_found">Comics list not found on server</string>
+    <string name="url">Comics URL</string>
+    <string name="url_hint">URL</string>
 </resources>
