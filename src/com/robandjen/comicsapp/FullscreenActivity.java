@@ -194,6 +194,7 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
     	super.onResume();
     	
     	final ComicsWebView v = (ComicsWebView) findViewById(R.id.fullscreen_content);
+    	v.onActivityResume();
     	v.setListener(new ComicsEvents() {
     		@Override 
     		public void onNextComic(View v) {
@@ -322,6 +323,11 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
 			deleteFile(COMICFILE);
 			loadDefaultXML();
 			return true;
+		}
+		
+		if (id == R.id.settings) {
+			Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
+			startActivity(intent);
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -475,4 +481,13 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
 		DownloadFragment df = DownloadFragment.newInstance(Url);
 		df.show(getFragmentManager(), "download");
 	}
+
+	@Override
+	protected void onPause() {
+		ComicsWebView wv = (ComicsWebView) findViewById(R.id.fullscreen_content);
+		wv.onActivityPause();
+		super.onPause();
+	}
+	
+	
 }

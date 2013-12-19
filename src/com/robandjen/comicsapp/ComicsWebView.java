@@ -20,17 +20,35 @@
 package com.robandjen.comicsapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.webkit.WebView;
 
-public class ComicsWebView extends WebView {
+public class ComicsWebView extends WebView implements OnSharedPreferenceChangeListener {
 
 	GestureDetector mGestureDetect;
 	ComicsEvents mEvents;
 	static final float MAXTHRESHOLDY = 500f;
 	static final float MINTHRESHOLDX = 1500f;
+	static final String GESTUREPREF = "pref_usegestures";
+	boolean mGesturesEnabled;
+	
+	
+	void onActivityPause() {
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
+		pref.unregisterOnSharedPreferenceChangeListener(this);
+	}
+	
+	void onActivityResume() {
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
+		pref.registerOnSharedPreferenceChangeListener(this);
+		mGesturesEnabled = pref.getBoolean(GESTUREPREF, false);
+	}
+	
 	public void setListener(ComicsEvents listener) {
 		mEvents = listener;
 	}
@@ -74,9 +92,16 @@ public class ComicsWebView extends WebView {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		boolean superrc = super.onTouchEvent(event);
-		boolean gesturerc = mGestureDetect.onTouchEvent(event);
+		boolean gesturerc = mGesturesEnabled && mGestureDetect.onTouchEvent(event);
 		
 		return superrc || gesturerc;
+	}
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		if (key.equals(GESTUREPREF)) {
+			mGesturesEnabled = sharedPreferences.getBoolean(key, false);
+		}
+		
 	}
 
 }
