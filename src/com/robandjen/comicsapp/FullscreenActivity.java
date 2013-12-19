@@ -131,15 +131,7 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
         }
         
         if (mComicList == null) {
-        	InputStream is;
-			try {
-				is = getAssets().open(COMICFILE);
-				loadXml(is);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	
+        	loadDefaultXML();
         }
         
         if (savedInstanceState != null) {
@@ -323,9 +315,25 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
 		if (id == R.id.download) {
 			URLFragment uf = URLFragment.newInstance();
 			uf.show(getFragmentManager(), "url");
+			return true;
 		}
 		
+		if (id == R.id.cleardata) {
+			deleteFile(COMICFILE);
+			loadDefaultXML();
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void loadDefaultXML() {
+		InputStream is;
+		try {
+			is = getAssets().open(COMICFILE);
+			loadXml(is);
+		} catch (IOException e) {
+			Log.wtf(TAG, "Exception loading default XML",e);
+		}
 	}
 
 	@Override
