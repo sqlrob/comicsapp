@@ -38,6 +38,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -72,6 +73,7 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
     private static final String CURURLKEY = "CurrentURL";
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    private URL mDownloadUrl;
     
     private static final String COMICFILE = "comics.xml";
     
@@ -361,7 +363,12 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
 	public void onDownloadComplete(String results) {
 		if (setComicsXml(results)) {
 			showCurrentComic();
+			SharedPreferences pref = getSharedPreferences(null, 0);
+			SharedPreferences.Editor edit = pref.edit();
+			edit.putString("url", mDownloadUrl.toString());
+			edit.commit();
 		}
+		
 	}
 
 	@Override
@@ -456,6 +463,7 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
 
 	@Override
 	public void onURLChosen(URL Url) {
+		mDownloadUrl = Url;
 		DownloadFragment df = DownloadFragment.newInstance(Url);
 		df.show(getFragmentManager(), "download");
 	}

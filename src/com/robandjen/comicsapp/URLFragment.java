@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,11 @@ public class URLFragment extends DialogFragment implements DialogInterface.OnCli
 		AlertDialog ad = (AlertDialog) getDialog();
 		Button ok = ad.getButton(Dialog.BUTTON_POSITIVE);
 		ok.setOnClickListener(this);
+		
+		SharedPreferences prefs = getActivity().getApplicationContext().getSharedPreferences(null, 0);
+		String url = prefs.getString("url", "");
+		EditText edtUrl = (EditText) ad.findViewById(R.id.editURL);
+		edtUrl.setText(url);
 	}
 
 	@Override
