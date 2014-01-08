@@ -4,6 +4,7 @@
     android:layout_height="match_parent" 
     android:textSize="20sp"
     android:textColor="@color/list_selector"
+    android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
     >
 
 </TextView>
