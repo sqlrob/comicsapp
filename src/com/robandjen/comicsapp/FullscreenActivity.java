@@ -56,10 +56,8 @@ import android.webkit.WebHistoryItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
@@ -74,6 +72,7 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private URL mDownloadUrl;
+    private ExpandableComicListAdapter mAdapter;
     
     private static final String COMICFILE = "comics.xml";
     
@@ -163,9 +162,13 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
     	}
     	updateShare(url);
     	
-    	ListView lv = (ListView) findViewById(R.id.comic_drawer);
-    	lv.setSelection(mCurComic);
-    	lv.setItemChecked(mCurComic, true);
+    	ExpandableListView elv = (ExpandableListView) findViewById(R.id.comic_drawer);
+    	long packedPos = mAdapter.comicsPosToPackedPos(mCurComic);
+    	
+    	//Selection doesn't work if expandGroup isn't called or group already expanded. ?????
+    	elv.expandGroup(ExpandableListView.getPackedPositionGroup(packedPos));
+    	elv.setSelectedChild(ExpandableListView.getPackedPositionGroup(packedPos),ExpandableListView.getPackedPositionChild(packedPos),true);
+    	elv.setItemChecked(elv.getFlatListPosition(packedPos), true);
     }
     
     void showCurrentComic() {
@@ -416,16 +419,18 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
 		mCurComic = 0;
 		
 		if (mComicList != null) {
-        	ListView lv = (ListView) findViewById(R.id.comic_drawer);
-        	lv.setAdapter(new ArrayAdapter<ComicsEntry>(getApplicationContext(),R.layout.comic_view,mComicList));
-        	lv.setOnItemClickListener(new ListView.OnItemClickListener() {
-
+        	ExpandableListView elv = (ExpandableListView) findViewById(R.id.comic_drawer);
+        	mAdapter = new ExpandableComicListAdapter(this, mComicList);
+        	elv.setAdapter(mAdapter);
+        	elv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+				
 				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					mCurComic = position;
+				public boolean onChildClick(ExpandableListView parent, View v,
+						int groupPosition, int childPosition, long id) {
+					mCurComic = mAdapter.childToComicsPos(groupPosition, childPosition);
 					showCurrentComic();
 					mDrawerLayout.closeDrawers();
+					return true;
 				}
 			});
         }
