@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 public class ExpandableComicListAdapter extends BaseExpandableListAdapter {
@@ -182,5 +183,28 @@ public class ExpandableComicListAdapter extends BaseExpandableListAdapter {
 	public long getChildId(int groupPosition, int childPosition) {
 		return childPosition;
 	}
-
+	
+	public int childToComicsPos(int groupPos,int childPos) {
+		return mCategoryIndex.get(groupPos).getOffset() + childPos;
+	}
+	
+	public long comicsPosToPackedPos(int comicsPos) {
+		int groupPos = 0;
+		int childPos = -1;
+		
+		for (CategoryIndexEntry cie : mCategoryIndex) {
+			final int offset = cie.getOffset();
+			if (comicsPos >= offset && comicsPos < offset + cie.getSize()) {
+				childPos = comicsPos - offset;
+				break;
+			}
+			++groupPos;
+		}
+		
+		if (childPos == -1) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		return ExpandableListView.getPackedPositionForChild(groupPos, childPos);
+	}
 }
