@@ -37,6 +37,35 @@ public class ComicsWebView extends WebView implements OnSharedPreferenceChangeLi
 	static final String GESTUREPREF = "pref_usegestures";
 	boolean mGesturesEnabled;
 	
+	//This assumes the view is the width of the screen
+	boolean handleTap(MotionEvent e) {
+		boolean rc = false;
+		if (mEvents != null) {
+			
+			//Allow links and such in the hit region
+			WebView.HitTestResult htr = getHitTestResult();
+			if (htr.getType() != WebView.HitTestResult.UNKNOWN_TYPE 
+					&& htr.getType() != WebView.HitTestResult.IMAGE_TYPE) {
+				return false;
+			}
+			
+			//Tap in 1/CLICKRANGEth of edge causes next/previous
+			final int CLICKRANGE = 10;
+			final int width = getWidth();
+			final int prevrange = width / CLICKRANGE;
+			final int nextrange = width - prevrange;
+			
+			final int xpos = (int) e.getX();
+			if (xpos <= prevrange) {
+				mEvents.onPreviousComic(this);
+				rc = true;
+			} else if (xpos >= nextrange) {
+				mEvents.onNextComic(this);
+				rc = true;
+			}
+		}
+		return rc;
+	}
 	
 	void onActivityPause() {
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
@@ -69,6 +98,11 @@ public class ComicsWebView extends WebView implements OnSharedPreferenceChangeLi
 					}
 				}
 				return rc;
+			}
+			
+			@Override
+			public boolean onSingleTapUp(MotionEvent e) {
+				return handleTap(e);
 			}
 		}
 		);
