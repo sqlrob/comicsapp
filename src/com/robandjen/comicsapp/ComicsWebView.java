@@ -35,11 +35,17 @@ public class ComicsWebView extends WebView implements OnSharedPreferenceChangeLi
 	static final float MAXTHRESHOLDY = 500f;
 	static final float MINTHRESHOLDX = 1500f;
 	static final String GESTUREPREF = "pref_usegestures";
+	static final String TAPPREF = "pref_usetap";
 	boolean mGesturesEnabled;
+	boolean mTapEnabled;
 	
 	//This assumes the view is the width of the screen
 	boolean handleTap(MotionEvent e) {
 		boolean rc = false;
+		if (!mTapEnabled) {
+			return false;
+		}
+		
 		if (mEvents != null) {
 			
 			//Allow links and such in the hit region
@@ -76,6 +82,7 @@ public class ComicsWebView extends WebView implements OnSharedPreferenceChangeLi
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
 		pref.registerOnSharedPreferenceChangeListener(this);
 		mGesturesEnabled = pref.getBoolean(GESTUREPREF, false);
+		mTapEnabled = pref.getBoolean(TAPPREF, true);
 	}
 	
 	public void setListener(ComicsEvents listener) {
@@ -86,6 +93,10 @@ public class ComicsWebView extends WebView implements OnSharedPreferenceChangeLi
 			@Override
 			public boolean onFling(MotionEvent e1,MotionEvent e2,float velocityX,float velocityY) {
 				boolean rc = false;
+				if (!mGesturesEnabled) {
+					return false;
+				}
+				
 				if (mEvents != null) {
 					if (Math.abs(velocityY) < Math.abs(velocityX) && Math.abs(velocityX) > MINTHRESHOLDX) {
 						if (velocityX < 0) {
@@ -126,7 +137,7 @@ public class ComicsWebView extends WebView implements OnSharedPreferenceChangeLi
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		boolean superrc = super.onTouchEvent(event);
-		boolean gesturerc = mGesturesEnabled && mGestureDetect.onTouchEvent(event);
+		boolean gesturerc = mGestureDetect.onTouchEvent(event);
 		
 		return superrc || gesturerc;
 	}
@@ -134,6 +145,9 @@ public class ComicsWebView extends WebView implements OnSharedPreferenceChangeLi
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if (key.equals(GESTUREPREF)) {
 			mGesturesEnabled = sharedPreferences.getBoolean(key, false);
+		}
+		else if (key.equals(TAPPREF)) {
+			mTapEnabled = sharedPreferences.getBoolean(key, true);
 		}
 		
 	}
