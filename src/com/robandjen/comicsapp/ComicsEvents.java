@@ -1,4 +1,4 @@
-/* Copyright 2012, Robert Myers */
+/* Copyright 2012-2014, Robert Myers */
 
 /*
  * This file is part of ComicsApp.
