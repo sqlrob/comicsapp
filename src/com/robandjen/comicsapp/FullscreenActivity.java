@@ -139,6 +139,14 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
         	showCurrentComic(url); 	
         }
         else {
+        	do {
+        		if (!bSkipOther || !mComicList.get(mCurComic).getOther()) {
+        			break;
+        		}
+        		
+        		++mCurComic;
+        		mCurComic %= mComicList.size();
+        	} while(mCurComic != 0);
         	showCurrentComic();
         }
   
@@ -175,20 +183,35 @@ public class FullscreenActivity extends Activity implements DownloadResults, URL
     	showCurrentComic(mComicList.get(mCurComic).getURL());
     }
     
+    final static boolean bSkipOther = true;
+    
     void nextComic() {
-    	if (++mCurComic >= mComicList.size()) {
-    		mCurComic = 0;
-    	}
+    	int lastComic = mCurComic;
+    	do {
+	    	if (++mCurComic >= mComicList.size()) {
+	    		mCurComic = 0;
+	    	}
+	    	
+	    	if (!bSkipOther || !mComicList.get(mCurComic).getOther()) {
+	    		break;
+	    	}
+    	} while (lastComic != mCurComic);
     	showCurrentComic();
     }
     
     void previousComic() {
-    	if (mCurComic == 0) {
-    		mCurComic = mComicList.size() - 1;
-    	}
-    	else {
-    		--mCurComic;
-    	}
+    	int lastComic = mCurComic;
+    	do {
+	    	if (mCurComic == 0) {
+	    		mCurComic = mComicList.size() - 1;
+	    	}
+	    	else {
+	    		--mCurComic;
+	    	}
+	    	if (!bSkipOther || !mComicList.get(mCurComic).getOther()) {
+	    		break;
+	    	}
+	    } while (lastComic != mCurComic);
     	showCurrentComic();
     }
     

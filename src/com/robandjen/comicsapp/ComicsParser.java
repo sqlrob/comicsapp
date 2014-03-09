@@ -54,10 +54,13 @@ public class ComicsParser {
 				else if (parser.getName().equals("Comic")) {
 					String curSource = parser.getAttributeValue(null, "source");
 					String curHref = parser.getAttributeValue(null,"href");
-					curlist.add(new ComicsEntry(curCategory,curSource,parser.nextText(),curHref));
+					curlist.add(new ComicsEntry(curCategory,curSource,parser.nextText(),curHref,false));
 				}
-				else if (parser.getName().equals("OtherComic")) { //Currently Ignored
-					parser.nextText();
+				else if (parser.getName().equals("OtherComic")) { 
+					String curSource = parser.getAttributeValue(null, "source");
+					String curHref = parser.getAttributeValue(null,"href");
+					curlist.add(new ComicsEntry(curCategory,curSource,parser.nextText(),curHref,true));
+
 				}
 			}
 			eventId = parser.nextTag();

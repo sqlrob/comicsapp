@@ -23,6 +23,7 @@ public class ComicsEntry {
 	private String mURL;
 	private String mName;
 	private String mSource;
+	private boolean mOther;
 	
 	public String getCategory() {
 		return mCategory;
@@ -40,13 +41,18 @@ public class ComicsEntry {
 		return mSource;
 	}
 	
-	public ComicsEntry(String category,String source,String name,String url) {
+	public ComicsEntry(String category,String source,String name,String url, boolean bOther) {
 		mCategory = category;
 		mSource = source;
 		mName = name;
 		mURL = url;
+		mOther = bOther;
 	}
 
+	public boolean getOther() {
+		return mOther;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
