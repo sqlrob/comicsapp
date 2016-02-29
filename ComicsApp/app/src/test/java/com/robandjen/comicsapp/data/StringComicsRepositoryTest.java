@@ -102,4 +102,26 @@ public class StringComicsRepositoryTest {
         assertThat(comic.getSource()).isEqualTo("Other");
         assertThat(comic.getHref()).isEqualTo(new URL("http://xkcd.com/"));
     }
+
+    @Test
+    public void can_subscribe_multiple_times() {
+        StringComicsRepository repo = new StringComicsRepository("<ComicsPage><Comics><Category name=\"first\">" +
+                "<Comic href=\"http://xkcd.com/\" source=\"Other\">XKCD</Comic>" +
+                "</Category></Comics></ComicsPage>");
+        TestSubscriber<Comics> subscriber = new TestSubscriber<>();
+        TestSubscriber<Comics> secondSubscriber = new TestSubscriber<>();
+
+        repo.getComicsObservable().subscribe(subscriber);
+        repo.getComicsObservable().subscribe(secondSubscriber);
+
+        subscriber.assertCompleted();
+        secondSubscriber.assertCompleted();
+
+        List<Comics> subscriberEvents = subscriber.getOnNextEvents();
+        List<Comics> secondSubscriberEvents = secondSubscriber.getOnNextEvents();
+        assertThat(subscriberEvents).hasSize(1);
+        assertThat(secondSubscriberEvents).hasSize(1);
+        assertThat(subscriberEvents.get(0).getCategories()).isNotEmpty();
+        assertThat(secondSubscriberEvents.get(0).getCategories()).isNotEmpty();
+    }
 }
