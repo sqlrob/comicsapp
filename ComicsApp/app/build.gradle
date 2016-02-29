@@ -28,4 +28,6 @@ dependencies {
         exclude group: 'xpp3', module: 'xpp3'
     }
     testCompile 'org.assertj:assertj-core:1.7.1'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
 }
