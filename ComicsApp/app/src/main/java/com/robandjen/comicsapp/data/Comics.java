@@ -27,7 +27,31 @@ public class Comics {
     @Path("Comics")
     private List<Category> categories;
 
+    private Comics() {
+        //For Simple XML
+    }
+
+    public Comics(List<Category> categories) {
+        this.categories = categories;
+    }
+
     public List<Category> getCategories() {
         return categories;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Comics comics = (Comics) o;
+
+        return categories.equals(comics.categories);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return categories.hashCode();
     }
 }

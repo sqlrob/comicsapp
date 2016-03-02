@@ -22,6 +22,7 @@ import org.simpleframework.xml.ElementListUnion;
 import java.util.List;
 
 public class Category {
+
     @Attribute
     private String name;
 
@@ -31,6 +32,15 @@ public class Category {
     })
     private List<ComicsElement> comics;
 
+    private Category() {
+        //Used by Simple XML
+    }
+
+    public Category(String name, List<ComicsElement> comics) {
+        this.name = name;
+        this.comics = comics;
+    }
+
     public String getName() {
         return name;
     }
@@ -38,4 +48,24 @@ public class Category {
     public List<ComicsElement> getComics() {
         return comics;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        if (!name.equals(category.name)) return false;
+        return !(comics != null ? !comics.equals(category.comics) : category.comics != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + (comics != null ? comics.hashCode() : 0);
+        return result;
+    }
+
 }

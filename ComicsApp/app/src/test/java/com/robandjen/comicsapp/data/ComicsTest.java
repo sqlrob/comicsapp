@@ -21,6 +21,8 @@ import org.simpleframework.xml.core.Persister;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Collections;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -52,16 +54,12 @@ public class ComicsTest {
         Comics comics = persister.read(Comics.class, "<ComicsPage><Comics><Category name=\"first\">" +
                 "<Comic href=\"http://xkcd.com/\" source=\"Other\">XKCD</Comic>" +
                 "</Category></Comics></ComicsPage>");
+        DefaultComicsElement expectedComic = new DefaultComicsElement(new URL("http://xkcd.com/"), "Other", "XKCD");
+        Category expectedCategory = new Category("first", Collections.singletonList((ComicsElement) expectedComic));
+        Comics expected = new Comics(Collections.singletonList(expectedCategory));
 
-        assertThat(comics.getCategories()).hasSize(1);
-        Category category = comics.getCategories().get(0);
-        assertThat(category.getName()).isEqualTo("first");
-        assertThat(category.getComics()).hasSize(1);
-        ComicsElement comic = category.getComics().get(0);
-        assertThat(comic.getDefaultSkip()).isFalse();
-        assertThat(comic.getName()).isEqualTo("XKCD");
-        assertThat(comic.getSource()).isEqualTo("Other");
-        assertThat(comic.getHref()).isEqualTo(new URL("http://xkcd.com/"));
+        assertThat(comics).isEqualTo(expected);
+        assertThat(comics.hashCode()).isEqualTo(expected.hashCode());
     }
 
     @Test
@@ -71,22 +69,14 @@ public class ComicsTest {
                 "<Comic href=\"http://www.punchanpie.net/\" source=\"Keenspot\">Punch an' Pie</Comic>" +
                 "</Category></Comics></ComicsPage>");
 
-        assertThat(comics.getCategories()).hasSize(1);
-        Category category = comics.getCategories().get(0);
-        assertThat(category.getName()).isEqualTo("first");
-        assertThat(category.getComics()).hasSize(2);
+        Comics expected = new Comics(
+                Collections.singletonList(new Category("first", Arrays.<ComicsElement>asList(
+                        new DefaultComicsElement(new URL("http://xkcd.com/"), "Other", "XKCD"),
+                        new DefaultComicsElement(new URL("http://www.punchanpie.net/"), "Keenspot", "Punch an' Pie"))
+                ))
+        );
 
-        ComicsElement ce = category.getComics().get(0);
-        assertThat(ce.getDefaultSkip()).isFalse();
-        assertThat(ce.getName()).isEqualTo("XKCD");
-        assertThat(ce.getHref()).isEqualTo(new URL("http://xkcd.com/"));
-        assertThat(ce.getSource()).isEqualTo("Other");
-
-        ce = category.getComics().get(1);
-        assertThat(ce.getDefaultSkip()).isFalse();
-        assertThat(ce.getName()).isEqualTo("Punch an' Pie");
-        assertThat(ce.getHref()).isEqualTo(new URL("http://www.punchanpie.net/"));
-        assertThat(ce.getSource()).isEqualTo("Keenspot");
+        assertThat(comics).isEqualTo(expected);
 
     }
 
@@ -101,14 +91,17 @@ public class ComicsTest {
                 "</Category>" +
                 "</Comics></ComicsPage>");
 
-        assertThat(comics.getCategories()).hasSize(2);
-        Category category = comics.getCategories().get(0);
-        assertThat(category.getComics()).hasSize(2);
-        assertThat(category.getName()).isEqualTo("first");
+        Comics expected = new Comics(Arrays.asList(
+                new Category("first", Arrays.<ComicsElement>asList(
+                        new DefaultComicsElement(new URL("http://xkcd.com/"), "Other", "XKCD"),
+                        new DefaultComicsElement(new URL("http://www.punchanpie.net/"), "Keenspot", "Punch an' Pie"))
+                ),
+                new Category("second", Collections.singletonList(
+                        (ComicsElement) new DefaultComicsElement(new URL("http://www.washingtonpost.com/wp-srv/artsandliving/comics/king.html?name=Baby_Blues"), "Washington Post", "Baby Blues")
+                ))
+        ));
 
-        category = comics.getCategories().get(1);
-        assertThat(category.getName()).isEqualTo("second");
-        assertThat(category.getComics()).hasSize(1);
+        assertThat(comics).isEqualTo(expected);
     }
 
     @Test
@@ -119,19 +112,13 @@ public class ComicsTest {
                 "<Comic href=\"http://www.washingtonpost.com/wp-srv/artsandliving/comics/king.html?name=Baby_Blues\" source=\"Washington Post\">Baby Blues</Comic>" +
                 "</Category></Comics></ComicsPage>");
 
-        Category category = comics.getCategories().get(0);
-        assertThat(category.getComics()).hasSize(3);
-        ComicsElement ce = category.getComics().get(0);
-        assertThat(ce.getDefaultSkip()).isFalse();
-        assertThat(ce.getName()).isEqualTo("XKCD");
+        Comics expected = new Comics(Collections.singletonList(new Category("first", Arrays.asList(
+                new DefaultComicsElement(new URL("http://xkcd.com/"), "Other", "XKCD"),
+                new SkippedComicsElement(new URL("http://www.punchanpie.net/"), "Keenspot", "Punch an' Pie"),
+                new DefaultComicsElement(new URL("http://www.washingtonpost.com/wp-srv/artsandliving/comics/king.html?name=Baby_Blues"), "Washington Post", "Baby Blues")
+        ))));
 
-        ce = category.getComics().get(1);
-        assertThat(ce.getDefaultSkip()).isTrue();
-        assertThat(ce.getName()).isEqualTo("Punch an' Pie");
-
-        ce = category.getComics().get(2);
-        assertThat(ce.getDefaultSkip()).isFalse();
-        assertThat(ce.getName()).isEqualTo("Baby Blues");
+        assertThat(comics).isEqualTo(expected);
     }
 
     @Test
@@ -147,7 +134,11 @@ public class ComicsTest {
                 "</Disclaimer>" +
                 "</ComicsPage>");
 
-        assertThat(comics.getCategories()).hasSize(1);
+        Comics expected = new Comics(Collections.singletonList(new Category("first", Collections.singletonList(
+                (ComicsElement) new DefaultComicsElement(new URL("http://xkcd.com/"), "Other", "XKCD")
+        ))));
+
+        assertThat(comics).isEqualTo(expected);
     }
 
     @Test
@@ -155,11 +146,13 @@ public class ComicsTest {
         Comics comics = persister.read(Comics.class, "<ComicsPage><Comics><Category name=\"first\">" +
                 "</Category></Comics></ComicsPage>");
 
+        Comics expected = new Comics(Collections.singletonList(new Category("first", null)));
         assertThat(comics.getCategories()).hasSize(1);
 
         Category category = comics.getCategories().get(0);
         assertThat(category.getName()).isEqualTo("first");
         assertThat(category.getComics()).isNullOrEmpty();
+        assertThat(comics).isEqualTo(expected);
     }
 
     @Test

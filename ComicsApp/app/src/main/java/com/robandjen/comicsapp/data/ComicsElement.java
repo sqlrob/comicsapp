@@ -21,6 +21,7 @@ import org.simpleframework.xml.Text;
 import java.net.URL;
 
 public abstract class ComicsElement {
+
     @Attribute(name = "href")
     private URL url;
 
@@ -43,4 +44,36 @@ public abstract class ComicsElement {
     }
 
     public abstract Boolean getDefaultSkip();
+
+    protected ComicsElement() {
+        //Do Nothing, used by SimpleXml
+    }
+
+    public ComicsElement(URL url, String source, String name) {
+        this.url = url;
+        this.source = source;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ComicsElement)) return false;
+
+        ComicsElement that = (ComicsElement) o;
+
+        if (!url.equals(that.url)) return false;
+        if (!getSource().equals(that.getSource())) return false;
+        if (!getName().equals(that.getName())) return false;
+        return getDefaultSkip().equals(that.getDefaultSkip());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = url.hashCode();
+        result = 31 * result + getSource().hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + (getDefaultSkip() ? 0 : 1);
+        return result;
+    }
 }

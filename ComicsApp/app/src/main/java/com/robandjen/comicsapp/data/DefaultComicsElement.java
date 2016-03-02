@@ -16,7 +16,17 @@
 
 package com.robandjen.comicsapp.data;
 
+import java.net.URL;
+
 public class DefaultComicsElement extends ComicsElement {
+
+    private DefaultComicsElement() {
+        super();
+    }
+
+    public DefaultComicsElement(URL url, String source, String name) {
+        super(url, source, name);
+    }
 
     @Override
     public Boolean getDefaultSkip() {

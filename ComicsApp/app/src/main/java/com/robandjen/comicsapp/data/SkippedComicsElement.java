@@ -15,7 +15,16 @@
  */
 package com.robandjen.comicsapp.data;
 
+import java.net.URL;
+
 public class SkippedComicsElement extends ComicsElement {
+    private SkippedComicsElement() {
+    }
+
+    public SkippedComicsElement(URL url, String source, String name) {
+        super(url, source, name);
+    }
+
     @Override
     public Boolean getDefaultSkip() {
         return true;
