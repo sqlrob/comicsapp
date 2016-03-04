@@ -15,9 +15,12 @@
  */
 package com.robandjen.comicsapp.data;
 
+import android.support.annotation.NonNull;
+
 import rx.Observable;
 
 
 public interface IComicsRepository {
+    @NonNull
     Observable<Comics> getComicsObservable();
 }

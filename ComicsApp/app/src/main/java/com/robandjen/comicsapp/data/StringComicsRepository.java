@@ -15,6 +15,8 @@
  */
 package com.robandjen.comicsapp.data;
 
+import android.support.annotation.NonNull;
+
 import org.simpleframework.xml.core.Persister;
 
 import rx.Observable;
@@ -24,7 +26,7 @@ public class StringComicsRepository implements IComicsRepository {
 
     private final String rawXml;
 
-    public StringComicsRepository(String rawXml)
+    public StringComicsRepository(@NonNull String rawXml)
     {
         this.rawXml = rawXml;
     }

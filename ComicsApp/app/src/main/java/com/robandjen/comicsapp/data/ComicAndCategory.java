@@ -18,20 +18,22 @@
 
 package com.robandjen.comicsapp.data;
 
+import android.support.annotation.NonNull;
+
 public class ComicAndCategory {
     private final Category category;
     private final ComicsElement comic;
 
-    public ComicAndCategory(ComicsElement comic, Category category) {
+    public ComicAndCategory(@NonNull ComicsElement comic, @NonNull Category category) {
         this.category = category;
         this.comic = comic;
     }
 
-    public Category getCategory() {
+    public @NonNull Category getCategory() {
         return category;
     }
 
-    public ComicsElement getComic() {
+    public @NonNull ComicsElement getComic() {
         return comic;
     }
 

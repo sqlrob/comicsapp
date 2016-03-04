@@ -16,6 +16,8 @@
 
 package com.robandjen.comicsapp.data;
 
+import android.support.annotation.NonNull;
+
 import java.net.URL;
 
 public class DefaultComicsElement extends ComicsElement {
@@ -24,7 +26,7 @@ public class DefaultComicsElement extends ComicsElement {
         super();
     }
 
-    public DefaultComicsElement(URL url, String source, String name) {
+    public DefaultComicsElement(@NonNull URL url, @NonNull String source, @NonNull String name) {
         super(url, source, name);
     }
 

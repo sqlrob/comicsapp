@@ -15,6 +15,8 @@
  */
 package com.robandjen.comicsapp.data;
 
+import android.support.annotation.NonNull;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
 
@@ -31,15 +33,15 @@ public abstract class ComicsElement {
     @Text
     private String name;
 
-    public URL getHref() {
+    @NonNull public URL getHref() {
         return url;
     }
 
-    public String getSource() {
+    @NonNull public String getSource() {
         return source;
     }
 
-    public String getName() {
+    @NonNull public String getName() {
         return name;
     }
 
@@ -49,7 +51,7 @@ public abstract class ComicsElement {
         //Do Nothing, used by SimpleXml
     }
 
-    public ComicsElement(URL url, String source, String name) {
+    public ComicsElement(@NonNull URL url, @NonNull String source, @NonNull String name) {
         this.url = url;
         this.source = source;
         this.name = name;

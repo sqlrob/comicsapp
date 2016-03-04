@@ -15,13 +15,15 @@
  */
 package com.robandjen.comicsapp.data;
 
+import android.support.annotation.NonNull;
+
 import java.net.URL;
 
 public class SkippedComicsElement extends ComicsElement {
     private SkippedComicsElement() {
     }
 
-    public SkippedComicsElement(URL url, String source, String name) {
+    public SkippedComicsElement(@NonNull URL url, @NonNull String source, @NonNull String name) {
         super(url, source, name);
     }
 

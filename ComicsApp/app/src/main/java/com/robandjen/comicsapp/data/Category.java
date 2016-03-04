@@ -15,6 +15,8 @@
  */
 package com.robandjen.comicsapp.data;
 
+import android.support.annotation.NonNull;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.ElementListUnion;
@@ -36,12 +38,12 @@ public class Category {
         //Used by Simple XML
     }
 
-    public Category(String name, List<ComicsElement> comics) {
+    public Category(@NonNull String name,List<ComicsElement> comics) {
         this.name = name;
         this.comics = comics;
     }
 
-    public String getName() {
+    @NonNull public String getName() {
         return name;
     }
 
