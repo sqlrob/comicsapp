@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import org.simpleframework.xml.core.Persister;
 
 import rx.Observable;
-import rx.functions.Func0;
 
 public class StringComicsRepository implements IComicsRepository {
 
@@ -31,12 +30,10 @@ public class StringComicsRepository implements IComicsRepository {
         this.rawXml = rawXml;
     }
 
-    //TODO: Get retrolambda working
     @Override
+    @NonNull
     public Observable<Comics> getComicsObservable() {
-        return Observable.defer(new Func0<Observable<Comics>>() {
-            @Override
-            public Observable<Comics> call() {
+        return Observable.defer(() -> {
                 try
                 {
                     Persister persister = new Persister();
@@ -47,6 +44,6 @@ public class StringComicsRepository implements IComicsRepository {
                     return Observable.error(e);
                 }
             }
-        });
+        );
     }
 }
